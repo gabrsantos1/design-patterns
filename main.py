@@ -46,10 +46,12 @@ def cadastrar_gato(sistema):
 
         nome = input("Nome do gato: ")
         idade = int(input("Idade: "))
+        raca = input("Raça: ")
 
         sistema.cadastrar_gato(
             nome,
-            idade
+            idade,
+            raca
         )
 
         print("\nGato cadastrado com sucesso!")
