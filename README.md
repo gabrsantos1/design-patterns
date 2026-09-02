@@ -5,7 +5,7 @@ O **Petfolio** é um sistema para cadastrar e gerenciar animais de estimação. 
 ## Funcionalidades
 
 - Cadastrar cachorros com nome, idade e raça
-- Cadastrar gatos com nome e idade
+- Cadastrar gatos com nome, idade e raça
 - Listar todos os animais cadastrados
 - Buscar animais por nome ou espécie
 - Alterar nome e idade
@@ -71,7 +71,7 @@ A classe `Sistema`, em `sistema.py`, atua como a fachada do projeto. O menu não
 
 ```python
 sistema.cadastrar_cachorro(nome, idade, raca)
-sistema.cadastrar_gato(nome, idade)
+sistema.cadastrar_gato(nome, idade, raca)
 sistema.listar_animais()
 sistema.buscar_por_nome(nome)
 sistema.buscar_por_especie(especie)
@@ -142,7 +142,7 @@ Cada espécie implementa seu próprio som:
 - Cachorro: `Au au!`
 - Gato: `Miau!`
 
-O cachorro também sobrescreve `apresentar()` para incluir sua raça.
+Tanto cachorro quanto gato sobrescrevem `apresentar()` para incluir sua raça.
 
 ## Como executar o frontend
 

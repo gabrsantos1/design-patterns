@@ -11,9 +11,9 @@ type ToastKind = "success" | "danger";
 
 const seed: Pet[] = [
   { id: "1", name: "Tobias", age: 4, species: "Cachorro", breed: "Golden Retriever", color: "gold" },
-  { id: "2", name: "Luna", age: 2, species: "Gato", color: "purple" },
+  { id: "2", name: "Luna", age: 2, species: "Gato", breed: "Siamês", color: "purple" },
   { id: "3", name: "Max", age: 7, species: "Cachorro", breed: "Beagle", color: "blue" },
-  { id: "4", name: "Mia", age: 1, species: "Gato", color: "pink" },
+  { id: "4", name: "Mia", age: 1, species: "Gato", breed: "Persa", color: "pink" },
 ];
 const colors = ["gold", "purple", "blue", "pink", "mint"];
 
@@ -42,8 +42,8 @@ function PetForm({ pet, onSubmit, onClose }: { pet?: Pet; onSubmit: (pet: Omit<P
     e.preventDefault();
     if (!name.trim()) return setError("Informe o nome do animal.");
     if (age === "" || Number(age) < 0) return setError("Informe uma idade válida.");
-    if (species === "Cachorro" && !breed.trim()) return setError("Informe a raça do cachorro.");
-    onSubmit({ name: name.trim(), age: Number(age), species, breed: species === "Cachorro" ? breed.trim() : undefined });
+    if (!breed.trim()) return setError(`Informe a raça do ${species.toLowerCase()}.`);
+    onSubmit({ name: name.trim(), age: Number(age), species, breed: breed.trim() });
   };
   return <form className="pet-form" onSubmit={submit}>
     <div className="species-picker">
@@ -53,7 +53,7 @@ function PetForm({ pet, onSubmit, onClose }: { pet?: Pet; onSubmit: (pet: Omit<P
     <label>Nome do animal<input autoFocus value={name} onChange={e => setName(e.target.value)} placeholder="Ex.: Amora"/></label>
     <div className="form-row">
       <label>Idade<input type="number" min="0" value={age} onChange={e => setAge(e.target.value)} placeholder="0"/></label>
-      <label>Raça {species === "Gato" && <small>(opcional)</small>}<input value={breed} disabled={species === "Gato"} onChange={e => setBreed(e.target.value)} placeholder="Ex.: Labrador"/></label>
+      <label>Raça<input value={breed} onChange={e => setBreed(e.target.value)} placeholder={species === "Cachorro" ? "Ex.: Labrador" : "Ex.: Siamês"}/></label>
     </div>
     {error && <div className="form-error">{error}</div>}
     <div className="modal-actions"><Button type="button" variant="ghost" onClick={onClose}>Cancelar</Button><Button type="submit">{pet ? "Salvar alterações" : "Cadastrar animal"}</Button></div>

@@ -22,9 +22,9 @@ class Sistema:
 
         self.__repositorio.adicionar(cachorro)
 
-    def cadastrar_gato(self, nome, idade):
+    def cadastrar_gato(self, nome, idade, raca):
 
-        gato = Gato(nome, idade)
+        gato = Gato(nome, idade, raca)
 
         self.__repositorio.adicionar(gato)
 
